@@ -17,9 +17,9 @@ class StudentSearch extends Student
     public function rules()
     {
         return [
-            [['id', 'age', 'id_classrom'], 'integer'],
+            [['id', 'age'], 'integer'],
             [['prenom'], 'string'],
-            [['nom', 'date_birth'], 'safe'],
+            [['nom', 'date_birth', 'id_classrom'], 'safe'],
         ];
     }
 
@@ -58,16 +58,19 @@ class StudentSearch extends Student
             return $dataProvider;
         }
 
+        $query->joinWith('classrom');
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'prenom' => $this->prenom,
             'date_birth' => $this->date_birth,
             'age' => $this->age,
-            'id_classrom' => $this->id_classrom,
+           // 'id_classrom' => $this->id_classrom,
         ]);
 
-        $query->andFilterWhere(['like', 'nom', $this->nom]);
+       $query->andFilterWhere(['like', 'student.nom', $this->nom]);
+        $query->andFilterWhere(['like', 'classroom.nom', $this->id_classrom]);
 
         return $dataProvider;
     }
