@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $description
  * @property string $etiquettes
+ * @property string $created_at
  */
 class Produit extends \yii\db\ActiveRecord
 {
@@ -28,6 +29,7 @@ class Produit extends \yii\db\ActiveRecord
     {
         return [
             [['description', 'etiquettes'], 'required'],
+            [['created_at' ,'created_at'], 'safe'],
             [['description', 'etiquettes'], 'string', 'max' => 255],
         ];
     }
@@ -41,6 +43,7 @@ class Produit extends \yii\db\ActiveRecord
             'id' => 'ID',
             'description' => 'Description',
             'etiquettes' => 'Etiquettes',
+            'created_at' => 'Created At',
         ];
     }
 }

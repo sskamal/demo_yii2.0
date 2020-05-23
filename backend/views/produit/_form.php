@@ -5,6 +5,9 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use app\models\Etiquette;
+use kartik\date\DatePicker;
+use yii\bootstrap4\Modal;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Produit */
@@ -17,14 +20,25 @@ use app\models\Etiquette;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-   
+    <?=  $form-> field($model, 'created_at')->widget(DatePicker::classname(), [
+
+        'options' => ['placeholder' => 'Select date ...'],
+        'language' => 'fr',
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd', 
+        ]
+        ]);
+    ?> 
+
+    
 
     <?php
     echo Select2::widget([
         'model' => $model,
         'name' => 'etiquettes',
         'attribute' => 'etiquettes',
-        'data' => ArrayHelper::map(Etiquette::find()->orderBy('description')->all(),'id','description'),  //['1'=>'1','2'=>2],
+        'data' => ArrayHelper::map(Etiquette::find()->orderBy('description')->all(),'description','description'),  //['1'=>'1','2'=>2],
         'options' => [
             'placeholder' => 'Select etiquettes ...',
             'multiple' => true
