@@ -5,7 +5,7 @@
     <h1 align="center">Yii 2 Advanced Project Template</h1>
     <br>
 </p>
-kamal
+
 Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 developing complex Web applications with multiple tiers.
 
